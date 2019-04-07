@@ -1,0 +1,140 @@
+const numberOfColumnsAndLines INTEGER; AS (ncl) // The number of columns and lines for the maze
+var matrix[][]; AS (m) // The matrix has the same number of columns and lines. The matrix borders will always be WALLS, except for the exit
+
+var pathMatrixWeight[][]; AS (w) // Each position will have a weight to determine if it has already been passed
+
+//var walkedMatrixPath[][]; AS (wP) // The path that the player has already done
+
+var playerPositionX INTEGER; AS (px) // The position of the player inside the maze. The player will always be placed in a situation where he can find the exit of the maze and the maze will always have an exit
+var playerPositionY INTEGER; AS (py)
+
+var randomPosition[][]; AS (r) // This position is selected randomly and is the one the player starts
+
+var possibleDirection[][] BOOLEAN; AS (pD) // This variable will hold the information about all the possible directions that the player can take in "moment 0" (standing)
+
+//var chosenDirection[][]; AS (cD) // The direction that was chosen, so the player can walk through it
+
+var escaped BOOLEAN; AS (e) // Defines if the player has escaped the maze or not
+
+####################################################################################################################################################################################################################################
+
+m = generateMaze(ncl);
+w = generatePathWeightValues(m);
+r = getRandomPositon(ncl);
+pD = setInitialDirectionValues();
+
+px = r.x;
+py = r.y;
+
+setInitialWeightValue(px, py);
+e = false;
+
+
+while(!e) 
+{
+	if (m[px-1][py] == 0)
+	{
+		if (isExit(px-1))
+		{
+			moveToPosition(px-1, py);
+			incrementWeightValueInPosition(px-1, py);
+			e = true;
+
+			continue;
+		}
+
+		pD = saveDirection(px-1, py);
+	}
+
+	if (m[px+1][py] == 0)
+	{
+		if (isExit(px+1))
+		{
+			moveToPosition(px+1, py);
+			incrementWeightValueInPosition(px+1, py);
+			e = true;
+
+			continue;
+		}
+
+		pD = saveDirection(px+1, py);
+	}
+
+	if (m[px][py-1] == 0)
+	{
+		if (isExit(py-1))
+		{
+			moveToPosition(px, py-1);
+			incrementWeightValueInPosition(px, py-1);
+			e = true;
+
+			continue;
+		}
+
+		pD = saveDirection(px, py-1);
+	}
+
+	if (m[px][py+1] == 0) 
+	{
+		if (isExit(py+1))
+		{
+			moveToPosition(px, py+1);
+			incrementWeightValueInPosition(px, py+1);
+			e = true;
+
+			continue;
+		}
+
+		pD = saveDirection(px, py+1);
+	}
+
+
+	var bestDirectionX = -1;
+	var bestDirectionY = -1;
+	var possibleDirectionsNumber = 0;
+
+	for (int l = 0; l < pD.length-1; l++)
+	{
+		for (int c = 0; c < pD.length-1; c++)
+		{
+			if (pD[l][c] == false) 
+			{
+				continue;
+			}
+
+			if (bestDirectionX == -1 && bestDirectionY == -1) 
+			{
+				bestDirectionX = l;
+				bestDirectionY = c;
+
+				continue;
+			}
+
+			if (w[bestDirectionX][bestDirectionY] > w[l][c])
+			{
+				bestDirectionX = l;
+				bestDirectionY = c;
+			} 
+
+			else if (w[bestDirectionX][bestDirectionY] == w[l][c])
+			{
+				possibleDirectionsNumber++;
+			}
+		}
+	}
+
+	if (possibleDirectionsNumber == pD.length)
+	{
+		var position = sortDirection(pD);
+
+		bestDirectionX = position.x;
+		bestDirectionY = position.y;
+	}
+
+	moveToPosition(bestDirectionX, bestDirectionY);
+	incrementWeightValueInPosition(bestDirectionX, bestDirectionY);
+
+	pD = resetPossibleDirections(pD);
+}
+
+CONGRATULATIONS! YOU ESCAPED THE MAZE!!
