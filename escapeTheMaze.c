@@ -2,16 +2,6 @@
 #include <stdlib.h>
 #include "mz_utils.h"
 
-void allocMemo(int size, int ***matrix)
-{
-    *matrix = malloc(size * sizeof **matrix);
-
-    for (int i = 0; i < size; i++)
-    {
-        (*matrix)[i] = malloc(size * sizeof (*matrix)[i]);
-    }
-}
-
 void freeMemo(int ***matrix, int rows)
 {
     for (int i=0; i < rows; i++)
@@ -25,26 +15,24 @@ int main()
 {
     printf("Maze generation Test: \n\n");
 
-    const N = 5;
+    const maze_size = 5;
     int **m;
 
-    //allocMemo(N, &m);
+    generateMaze(maze_size, maze_size, &m);
 
-    generateMaze(N, N, &m);
-
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < maze_size; i++)
     {
-        for (int j = 0; j < N; j++)
+        for (int j = 0; j < maze_size; j++)
         {
             printf("%d  ", m[i][j]);
-            if (j == N-1)
+            if (j == maze_size-1)
             {
                 printf("\n");
             }
         }
     }
 
-    freeMemo(&m, N);
+    freeMemo(&m, maze_size);
 
     return 0;
 }
