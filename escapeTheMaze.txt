@@ -34,7 +34,7 @@ while(!e)
 {
 	if (m[px-1][py] == 0)
 	{
-		if (isExit(px-1))
+		if (isExit(px-1, py))
 		{
 			moveToPosition(px-1, py);
 			incrementWeightValueInPosition(px-1, py);
@@ -48,7 +48,7 @@ while(!e)
 
 	if (m[px+1][py] == 0)
 	{
-		if (isExit(px+1))
+		if (isExit(px+1, py))
 		{
 			moveToPosition(px+1, py);
 			incrementWeightValueInPosition(px+1, py);
@@ -62,7 +62,7 @@ while(!e)
 
 	if (m[px][py-1] == 0)
 	{
-		if (isExit(py-1))
+		if (isExit(px, py-1))
 		{
 			moveToPosition(px, py-1);
 			incrementWeightValueInPosition(px, py-1);
@@ -76,7 +76,7 @@ while(!e)
 
 	if (m[px][py+1] == 0) 
 	{
-		if (isExit(py+1))
+		if (isExit(px, py+1))
 		{
 			moveToPosition(px, py+1);
 			incrementWeightValueInPosition(px, py+1);
@@ -123,16 +123,19 @@ while(!e)
 		}
 	}
 
-	if (possibleDirectionsNumber == pD.length)
+	if (possibleDirectionsNumber != 1)
 	{
-		var position = sortDirection(pD);
+		var direction = sortDirection(pD);
 
-		bestDirectionX = position.x;
-		bestDirectionY = position.y;
+		bestDirectionX = direction.x;
+		bestDirectionY = direction.y;
 	}
-
-	moveToPosition(bestDirectionX, bestDirectionY);
-	incrementWeightValueInPosition(bestDirectionX, bestDirectionY);
+	
+	px = bestDirectionX;
+	py = bestDirectionY;
+	
+	moveToPosition(px, py);
+	incrementWeightValueInPosition(px, py);
 
 	pD = resetPossibleDirections(pD);
 }
