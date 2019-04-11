@@ -6,10 +6,12 @@
         int posX = 0;
         int posY = 0;
 
+        srand(time(0));
+
         while (posX < 1 || posX == size-1 || posY < 1 || posY == size-1)
         {
-            posX = rand() % (size-2);
-            posY = rand() % (size-2);
+            posX = rand() % (size-1);
+            posY = rand() % (size-1);
         }
 
         *x = posX;

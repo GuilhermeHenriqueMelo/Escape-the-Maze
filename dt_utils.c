@@ -24,7 +24,7 @@
         const ARR_SIZE = sizeof(*matrix) / sizeof((*matrix)[0]); // It may not work
         int number_of_options = 0;
         struct Direction direction_arr[4];
-        int counter = 0;
+        int possibleDirectionsNumber = 0;
 
         for (int i = 0; i < ARR_SIZE-1; i++)
         {
@@ -32,10 +32,10 @@
             {
                 if ((*matrix)[i][j] == true)
                 {
-                    direction_arr[counter].x = i;
-                    direction_arr[counter].y = j;
+                    direction_arr[possibleDirectionsNumber].x = i;
+                    direction_arr[possibleDirectionsNumber].y = j;
 
-                    counter++;
+                 possibleDirectionsNumber++;
                     number_of_options++;
                 }
             }
@@ -43,13 +43,11 @@
 
         if (number_of_options == 1)
         {
-            return direction_arr[counter];
+            return direction_arr[possibleDirectionsNumber];
         }
 
         int sorted_position = -1;
-
-        sorted_position = rand() % (counter+1);
-        struct Direction aux = direction_arr[sorted_position];
+        sorted_position = rand() %  (possibleDirectionsNumber+1);
 
         return direction_arr[sorted_position];
     }
