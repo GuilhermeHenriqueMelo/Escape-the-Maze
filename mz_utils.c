@@ -49,17 +49,6 @@
         matrix[x][y] += 1;
     }
 
-    void setInitialDirectionsValues(int rows, int columns, bool ***matrix)
-    {
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
-                (*matrix)[i][j] = false;
-            }
-        }
-    }
-
     void setInitialWeightValue(int x, int y, int ***matrix)
     {
         (*matrix)[x][y] = 1;

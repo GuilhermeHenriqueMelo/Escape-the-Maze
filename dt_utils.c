@@ -17,6 +17,16 @@
         }
     }
 
+    void setInitialDirectionsValues(int size, struct Direction **matrix)
+    {
+        struct Direction d = {.x = 0, .y = 0};
+
+        for (int i = 0; i < size; i++)
+        {
+            (*matrix)[i] = d;
+        }
+    }
+
     void saveDirection(int posX, int posY, struct Direction **array, int counter)
     {
         struct Direction direction = { .x = 0, .y = 0};

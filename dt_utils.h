@@ -14,6 +14,8 @@
 
         void resetPossibleDirections(struct Direction **array);
 
+        void setInitialDirectionsValues(int size, struct Direction **matrix);
+
         void generateDirectionsArray(int size, struct Direction **array);
 
 #endif
