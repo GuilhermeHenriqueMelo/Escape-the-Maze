@@ -55,7 +55,7 @@
         {
             for (int j = 0; j < columns; j++)
             {
-                matrix[i][j] = false;
+                (*matrix)[i][j] = false;
             }
         }
     }
@@ -71,7 +71,7 @@
         {
             for (int j = 0; j < columns; j++)
             {
-                matrix[i][j] = 0;
+                (*matrix)[i][j] = 0;
             }
         }
     }

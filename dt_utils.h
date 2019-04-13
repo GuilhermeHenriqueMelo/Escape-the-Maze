@@ -8,9 +8,12 @@
             int x, y;
         };
         
-        void saveDirection(int x, int y, int ***matrix);
+        void saveDirection(int posX, int posY, struct Direction **array, int counter);
 
-        struct Direction sortDirection(int ***matrix);
+        struct Direction sortDirection(struct Direction **array, int number_of_directions);
 
-        void resetPossibleDirections(int ***matrix);
+        void resetPossibleDirections(struct Direction **array);
+
+        void generateDirectionsArray(int size, struct Direction **array);
+
 #endif

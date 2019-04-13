@@ -1,53 +1,44 @@
 #include <stdlib.h>
 #include "dt_utils.h"
 
-    void resetPossibleDirections(int ***matrix)
+    void generateDirectionsArray(int size, struct Direction **array)
     {
-        const ARR_SIZE = sizeof(*matrix) / sizeof((*matrix)[0]);
+        *array = malloc(size * sizeof *array);
+    }
+
+    void resetPossibleDirections(struct Direction **array)
+    {
+        const ARR_SIZE = sizeof(*array) / sizeof((*array)[0]);
+        struct Direction d = {.x = 0, .y = 0};
 
         for (int i = 0; i < ARR_SIZE; i++)
         {
-            for (int j = 0; j < ARR_SIZE; j++)
-            {
-                (*matrix)[i][j] = false;
-            }
+            (*array)[i] = d;
         }
     }
 
-    void saveDirection(int x, int y, int ***matrix)
+    void saveDirection(int posX, int posY, struct Direction **array, int counter)
     {
-        (*matrix)[x][y] = true;
+        struct Direction direction = { .x = 0, .y = 0};
+        direction.x = posX;
+        direction.y = posY;
+
+        (*array)[counter] = direction;
     }
 
-    struct Direction sortDirection(int ***matrix)
+    struct Direction sortDirection(struct Direction **array, int number_of_directions)
     {
-        const ARR_SIZE = sizeof(*matrix) / sizeof((*matrix)[0]); // It may not work
-        int number_of_options = 0;
+        const ARR_SIZE = sizeof(*array) / sizeof((*array)[0]); // It may not work
+        int number_of_options = number_of_directions;
         struct Direction direction_arr[4];
-        int possibleDirectionsNumber = 0;
-
-        for (int i = 0; i < ARR_SIZE-1; i++)
-        {
-            for (int j = 0; j < ARR_SIZE-1; j++)
-            {
-                if ((*matrix)[i][j] == true)
-                {
-                    direction_arr[possibleDirectionsNumber].x = i;
-                    direction_arr[possibleDirectionsNumber].y = j;
-
-                 possibleDirectionsNumber++;
-                    number_of_options++;
-                }
-            }
-        }
 
         if (number_of_options == 1)
         {
-            return direction_arr[possibleDirectionsNumber];
+            return (*array)[number_of_options];
         }
 
         int sorted_position = -1;
-        sorted_position = rand() %  (possibleDirectionsNumber+1);
+        sorted_position = rand() % number_of_options;
 
-        return direction_arr[sorted_position];
+        return (*array)[sorted_position];
     }
