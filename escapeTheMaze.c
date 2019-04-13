@@ -17,9 +17,9 @@ void freeMemoMaze(int ***matrix, int rows)
     free(*matrix);
 }
 
-void freeMemoDirections(struct Direction **matrix, int rows)
+void freeMemoDirections(struct Direction **array, int rows)
 {
-    free(*matrix);
+    free(*array);
 }
 
 
@@ -36,7 +36,21 @@ int main()
     struct Direction *d = NULL; // Directions array
 
     generateDirectionsArray(directions_size, &d);
-    
+    setInitialDirectionsValues(directions_size, &d);
+
+    int x, y = 0;
+    int counter = 0;
+
+    x = 0;
+    y = 1;
+    saveDirection(x, y, &d, counter);
+    counter++;
+
+    x = 2;
+    y = 3;
+    saveDirection(x, y, &d, counter);
+    counter++;
+
     for (int i = 0; i < directions_size; i++)
     {
         printf("%d, %d\n", d[i].x, d[i].y);
