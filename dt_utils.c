@@ -3,7 +3,7 @@
 
     void generateDirectionsArray(int size, struct Direction **array)
     {
-        *array = malloc(size * sizeof *array);
+        *array = malloc(size * sizeof **array);
     }
 
     void resetPossibleDirections(struct Direction **array)

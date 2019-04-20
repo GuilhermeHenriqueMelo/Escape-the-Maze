@@ -30,7 +30,7 @@
 
     bool isExit(int x, int y, int ***matrix)
     {
-        if (matrix[x][y] == 0)
+        if ((*matrix)[x][y] == 3)
         {
             return true;
         }
