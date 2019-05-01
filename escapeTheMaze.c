@@ -25,9 +25,9 @@ int main()
 {
     printf("Maze generation Test: \n\n");
 
-    const maze_size = 10;
-    const weight_matrix_size = maze_size - 2;
-    const directions_size = 4;
+    const int maze_size = 10;
+    const int weight_matrix_size = maze_size - 2;
+    const int directions_size = 4;
 
     int **m = NULL; // Maze
     int **wM = NULL; // Path weight matrix
