@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "mz_utils.h"
+#include "dt_utils.h"
 
-void freeMemo(int ***matrix, int rows)
+void freeMemoMaze(int ***matrix, int rows)
 {
     for (int i=0; i < rows; i++)
     {
@@ -11,28 +13,33 @@ void freeMemo(int ***matrix, int rows)
     free(*matrix);
 }
 
-int main() 
+void freeMemoDirections(struct Direction **array)
 {
+    free(*array);
+}
+
+
+//#######################################################################################################################################
+
+const int MAZE_SIZE = 10;
+const int WIEGHT_MATRIX_SIZE = MAZE_SIZE - 2;
+const int DIRECTIONS_SIZE = 4;
+
+int main()
+{
+    srand(time(NULL));
     printf("Maze generation Test: \n\n");
 
-    const maze_size = 5;
-    int **m;
+    int **m = NULL; // Maze
+    int **wM = NULL; // Path weight matrix
+    int counter = 0;
+    struct Direction *d = NULL; // Directions array
+    struct Direction direction = {.x = 0, .y = 0};
 
-    generateMaze(maze_size, maze_size, &m);
+    //    const int MAZE_BYTE_SIZE;
+    //    const int MAZE_WEIGHT_BYTE_SIZE;
+//    const int DIRECTIONS_ARR_BYTE_SIZE = generateDirectionsArray(DIRECTIONS_SIZE, &d);
 
-    for (int i = 0; i < maze_size; i++)
-    {
-        for (int j = 0; j < maze_size; j++)
-        {
-            printf("%d  ", m[i][j]);
-            if (j == maze_size-1)
-            {
-                printf("\n");
-            }
-        }
-    }
-
-    freeMemo(&m, maze_size);
 
     return 0;
 }

@@ -9,8 +9,6 @@
 
         void getRandomPositon(int *x, int *y, int size, int ***matrix);
 
-        void setInitialDirectionsValues(int rows, int columns, bool ***matrix);
-
         void setInitialWeightValue(int x, int y, int ***matrix);
 
         void incrementWeightValueInPosition(int x, int y, int ***matrix);

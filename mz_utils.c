@@ -6,10 +6,12 @@
         int posX = 0;
         int posY = 0;
 
+        srand(time(0));
+
         while (posX < 1 || posX == size-1 || posY < 1 || posY == size-1)
         {
-            posX = rand() % (size-2);
-            posY = rand() % (size-2);
+            posX = rand() % (size-1);
+            posY = rand() % (size-1);
         }
 
         *x = posX;
@@ -28,7 +30,7 @@
 
     bool isExit(int x, int y, int ***matrix)
     {
-        if (matrix[x][y] == 0)
+        if ((*matrix)[x][y] == 3)
         {
             return true;
         }
@@ -47,17 +49,6 @@
         matrix[x][y] += 1;
     }
 
-    void setInitialDirectionsValues(int rows, int columns, bool ***matrix)
-    {
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < columns; j++)
-            {
-                matrix[i][j] = false;
-            }
-        }
-    }
-
     void setInitialWeightValue(int x, int y, int ***matrix)
     {
         (*matrix)[x][y] = 1;
@@ -69,7 +60,7 @@
         {
             for (int j = 0; j < columns; j++)
             {
-                matrix[i][j] = 0;
+                (*matrix)[i][j] = 0;
             }
         }
     }
