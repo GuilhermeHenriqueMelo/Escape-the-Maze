@@ -1,14 +1,17 @@
 #include <stdlib.h>
 #include "dt_utils.h"
 
-    void generateDirectionsArray(int size, struct Direction **array)
+    int generateDirectionsArray(int size, struct Direction **array)
     {
-        *array = malloc(size * sizeof **array);
+        const int SIZE = size * (sizeof **array);
+        *array = malloc(SIZE);
+
+        return SIZE;
     }
 
-    void resetPossibleDirections(struct Direction **array)
+    void resetPossibleDirections(struct Direction **array, const int BYTE_SIZE)
     {
-        const ARR_SIZE = sizeof(*array) / sizeof((*array)[0]);
+        const int ARR_SIZE = BYTE_SIZE / sizeof((*array)[0]);
         struct Direction d = {.x = 0, .y = 0};
 
         for (int i = 0; i < ARR_SIZE; i++)
@@ -38,9 +41,7 @@
 
     struct Direction sortDirection(struct Direction **array, int number_of_directions)
     {
-        const ARR_SIZE = sizeof(*array) / sizeof((*array)[0]); // It may not work
         int number_of_options = number_of_directions;
-        struct Direction direction_arr[4];
 
         if (number_of_options == 1)
         {

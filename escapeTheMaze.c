@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "mz_utils.h"
 #include "dt_utils.h"
 
@@ -20,49 +21,25 @@ void freeMemoDirections(struct Direction **array)
 
 //#######################################################################################################################################
 
+const int MAZE_SIZE = 10;
+const int WIEGHT_MATRIX_SIZE = MAZE_SIZE - 2;
+const int DIRECTIONS_SIZE = 4;
 
-int main() 
+int main()
 {
+    srand(time(NULL));
     printf("Maze generation Test: \n\n");
-
-    const int maze_size = 10;
-    const int weight_matrix_size = maze_size - 2;
-    const int directions_size = 4;
 
     int **m = NULL; // Maze
     int **wM = NULL; // Path weight matrix
-    struct Direction *d = NULL; // Directions array
-
-    struct Direction direction = {.x = 0, .y = 0};
     int counter = 0;
+    struct Direction *d = NULL; // Directions array
+    struct Direction direction = {.x = 0, .y = 0};
 
-    generateDirectionsArray(directions_size, &d);
-    setInitialDirectionsValues(directions_size, &d);
+    //    const int MAZE_BYTE_SIZE;
+    //    const int MAZE_WEIGHT_BYTE_SIZE;
+//    const int DIRECTIONS_ARR_BYTE_SIZE = generateDirectionsArray(DIRECTIONS_SIZE, &d);
 
-    direction.x = 1;
-    direction.y = 4;
-
-    saveDirection(direction.x, direction.y, &d, counter);
-    counter++;
-
-    direction.x = 4;
-    direction.y = 4;
-
-    saveDirection(direction.x, direction.y, &d, counter);
-    counter++;
-
-    direction.x = 3;
-    direction.y = 2;
-
-    saveDirection(direction.x, direction.y, &d, counter);
-    counter++;
-
-    for (int i = 0; i < directions_size; i++)
-    {
-        printf("%d, %d\n", d[i].x, d[i].y);
-    }
-
-    freeMemoDirections(&d);
 
     return 0;
 }
